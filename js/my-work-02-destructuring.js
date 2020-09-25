@@ -50,10 +50,42 @@ const profile = {
     },
 };
 
-const { stats } = profile;
+const {
+    stats: { views: middle = 999, followers, likes },
+} = profile;
 
-console.log(stats);
+console.log(middle, followers, likes);
 
-const { views } = stats;
+/*
+ * Деструктуризация массивов
+ */
 
-console.log(views);
+const rgb = [255, 100, 80, 555];
+
+const [one, , three] = rgb;
+
+console.log(one, three);
+
+const authors = {
+    kiwi: 4,
+    poly: 7,
+    ajax: 9,
+    mango: 6,
+};
+
+const keys = Object.keys(authors);
+
+console.log(keys);
+
+let maxRating = 0;
+let nameMaxRating;
+
+for (const key of keys) {
+    if (authors[key] > maxRating) {
+        maxRating = authors[key];
+        nameMaxRating = key;
+    }
+    continue;
+}
+
+console.log(nameMaxRating, maxRating);
