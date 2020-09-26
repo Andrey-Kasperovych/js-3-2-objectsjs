@@ -38,23 +38,23 @@
  * Глубокая деструктуризация
  */
 
-const profile = {
-    name: 'Jacques Gluke',
-    tag: 'jgluke',
-    location: 'Ocho Rios, Jamaica',
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/r_oy/128.jpg',
-    stats: {
-        followers: 5603,
-        views: 4827,
-        likes: 1308,
-    },
-};
+// const profile = {
+//     name: 'Jacques Gluke',
+//     tag: 'jgluke',
+//     location: 'Ocho Rios, Jamaica',
+//     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/r_oy/128.jpg',
+//     stats: {
+//         followers: 5603,
+//         views: 4827,
+//         likes: 1308,
+//     },
+// };
 
-const {
-    stats: { views: middle = 999, followers, likes },
-} = profile;
+// const {
+//     stats: { views: middle = 999, followers, likes },
+// } = profile;
 
-console.log(middle, followers, likes);
+// console.log(middle, followers, likes);
 
 /*
  * Деструктуризация массивов
@@ -73,19 +73,104 @@ const authors = {
     mango: 6,
 };
 
-const keys = Object.keys(authors);
+// const keys = Object.keys(authors);
 
-console.log(keys);
+// console.log(keys);
+
+// let maxRating = 0;
+// let nameMaxRating;
+
+// for (const key of keys) {
+//     if (authors[key] > maxRating) {
+//         maxRating = authors[key];
+//         nameMaxRating = key;
+//     }
+//     continue;
+// }
+
+// console.log(nameMaxRating, maxRating);
+
+const entries = Object.entries(authors);
+
+console.log(entries);
 
 let maxRating = 0;
 let nameMaxRating;
 
-for (const key of keys) {
-    if (authors[key] > maxRating) {
-        maxRating = authors[key];
-        nameMaxRating = key;
+// for (const entry of entries) {
+//     console.log(entry);
+
+//     if (entry[1] > maxRating) {
+//         maxRating = entry[1];
+//         nameMaxRating = entry[0];
+//     }
+
+//     continue;
+// }
+
+// console.log(
+//     `Имя и значение свойства обьекта с максимальным рейтингом ${nameMaxRating}: ${maxRating}`,
+// );
+
+for (const [name, rating] of entries) {
+    console.log(name, rating);
+    if (rating > maxRating) {
+        maxRating = rating;
+        nameMaxRating = name;
     }
-    continue;
 }
 
-console.log(nameMaxRating, maxRating);
+console.log(`Имя ключа с максимальным рейтингом - ${nameMaxRating}`);
+console.log(
+    `Имя и значение свойства обьекта с максимальным рейтингом ${nameMaxRating}: ${maxRating}`,
+);
+
+/*
+ * Операция rest (сбор)
+ */
+// const profile = {
+//     name: 'Jacques Gluke',
+//     tag: 'jgluke',
+//     location: 'Ocho Rios, Jamaica',
+//     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/r_oy/128.jpg',
+//     stats: {
+//         followers: 5603,
+//         views: 4827,
+//         likes: 1308,
+//     },
+// };
+
+// const { name, stats, ...restProp } = profile;
+
+// console.log(restProp);
+// console.log(name, stats);
+
+/*
+ * Паттерн «Обьект настроек»
+ * - деструктуризация параметра-обьекта в подписи функции
+ * - rest при деструктуризации в подписи
+ */
+
+const showProfileInfo = function ({
+    name,
+    tag,
+    location,
+    avatar,
+    stats: { followers, views, likes },
+}) {
+    console.log(name, tag, location, avatar, followers, views, likes);
+};
+
+const profile = {
+    name: 'Jacques Gluke',
+    tag: 'jgluke',
+    location: 'Ocho Rios, Jamaica',
+    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/r_oy/128.jpg',
+    stats: {
+        followers: 5603,
+        views: 4827,
+        likes: 1308,
+    },
+};
+
+showProfileInfo(profile);
