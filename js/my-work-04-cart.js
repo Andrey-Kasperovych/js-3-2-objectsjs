@@ -19,20 +19,36 @@ const cart = {
     getItems() {
         return this.items;
     },
+
     add(product) {
         this.items.push(product);
     },
+
     remove(productName) {
-        for (let i = 0; i < this.items.length; i += 1) {
-            console.log(this.items[i]);
-            if (productName === this.items[i].name) {
-                this.items.splice(i, 1);
-                continue;
+        const { items } = this;
+
+        for (let i = 0; i < items.length; i += 1) {
+            const { name } = items[i];
+            console.log(name);
+
+            if (productName === name) {
+                console.log(`Нашли елемент ${name} с индексом ${i}`);
+                items.splice(i, 1);
             }
         }
     },
-    clear() {},
-    countTotalPrice() {},
+    clear() {
+        this.items = [];
+    },
+    countTotalPrice() {
+        const { items } = this;
+        let totalePrice = 0;
+        for (let i = 0; i < items.length; i += 1) {
+            const { price } = items[i];
+            totalePrice += price;
+        }
+        return totalePrice;
+    },
     increaseQuantity(productName) {},
     decreaseQuantity(productName) {},
 };
@@ -50,7 +66,7 @@ cart.remove('🍋');
 console.table(cart.getItems());
 
 // cart.clear();
-// console.table(cart.getItems());
+// console.log(cart.getItems());
 
 // cart.increaseQuantity('🍎');
 // console.table(cart.getItems());
@@ -59,4 +75,4 @@ console.table(cart.getItems());
 // cart.decreaseQuantity('🍋');
 // console.table(cart.getItems());
 
-// console.log('Total: ', cart.countTotalPrice());
+console.log('Total: ', cart.countTotalPrice());
